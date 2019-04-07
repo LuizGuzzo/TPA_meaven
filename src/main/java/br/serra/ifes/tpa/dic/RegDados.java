@@ -4,29 +4,29 @@ package br.serra.ifes.tpa.dic;
  *
  * @author luizg
  */
-public class RegDados {
-    /*se for para tratar isso como Object é so converter td por obj, mas no momento estou querendo mostrar o funcionamento logo estou deixando como string*/
-    private Object chave; 
-    private Object valor;
+public class RegDados<C,V> {
+    
+    private C chave; 
+    private V valor;
 
-    public RegDados(Object chave, Object valor) {
+    public RegDados(C chave, V valor) {
         this.chave = chave;
         this.valor = valor;
     }
 
-    public Object getChave() {
+    public C getChave() {
         return chave;
     }
 
-    public void setChave(Object chave) {
+    public void setChave(C chave) {
         this.chave = chave;
     }
 
-    public Object getValor() {
+    public V getValor() {
         return valor;
     }
 
-    public void setValor(Object valor) {
+    public void setValor(V valor) {
         this.valor = valor;
     }
 

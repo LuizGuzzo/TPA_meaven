@@ -8,15 +8,15 @@ import java.util.*;
  *
  * @author luizg
  */
-public class TADDic {
-    private LinkedList[] vet = null;
+public class TADDic<C,V> {
+    private LinkedList<RegDados>[] vet = null;
     private int qnt_entradas = 0;
     private int size = 0;
     private HashEngine hashEngine;
     
     public TADDic() {
         this.size = 256;
-        this.StartTADDic(size, new HashEngineInicial());
+        this.StartTADDic(size, new HashEngineInicial()); //perguntar porque quando uso o construtor novamente ele "buga"
     }
     
     public TADDic(int n) {
@@ -28,66 +28,78 @@ public class TADDic {
     private void StartTADDic(int n, HashEngine hashEngine) {
         this.qnt_entradas = 0;
         this.hashEngine = hashEngine;
-        this.insert_default_list_TADDic(n);
-    }
-    
-    private void insert_default_list_TADDic(int n){
-        vet = new LinkedList[n];
+        this.vet = new LinkedList[n];
         for(int i = 0; i < n; i++){
-            vet[i] = new LinkedList<RegDados>(); //para cada casa do vetor cria uma lista de "RegDados"
+            vet[i] = new LinkedList<RegDados>();
         }
     }
     
-    private int getIndice(Object o) {
-        long hash = this.hashEngine.gerarHash(o);
-        int index = (int)(hash % this.vet.length);
+    private int getIndice(C chave){
+        return getIndice(chave,this.vet);
+    }
+    
+    private int getIndice(C chave, LinkedList[] vet) {
+        long hash = this.hashEngine.gerarHash(chave);
+        int index = (int)(hash % vet.length);
         return index;
     }
 
-    public void insert(Object o, Object reg){
-        //RegDados aux = find(o); //carrega o object correspondente a key, se encontrar adiciona nele (para fazer o replace automatico)
-        int indice = this.getIndice(o); //pega o indice correspondente a este object
-        vet[indice].add((RegDados)reg); // adiciona ele no vetor em que se encontra
-        qnt_entradas++;
+
         
-        // se o tamanho de inserção estiver chegando no tamanho maximo ele redimensiona
-        if(qnt_entradas >= (size*0.9)){
-            redimesionar(size*2);
+    public void insert(C chave, V valor){
+        int indice = this.getIndice(chave);
+        this.vet[indice].add(new RegDados(chave,valor));
+        this.qnt_entradas++;
+        if(qnt_entradas >= (this.size*0.9)){
+            this.redimesionar(size*2);
         }
     }
     
-    public RegDados find(Object o){
-        int indice = this.getIndice(o); //pega o indice correspondente a este object
-        int pos = 0;
-        while(pos < vet[indice].size()){ //percorrendo a lista do indice encontrado
-            if(((RegDados)(vet[indice].get(pos))).getChave().equals(o)){ // se na posição do indice em que ele está tiver a mesma chave do Objeto q passou
-                return (RegDados) vet[indice].get(pos); // pega o object encontrado
+
+    private RegDados<C,V> findDado(C chave){
+        return findDado(chave,this.vet);
+    }
+    
+    private RegDados<C,V> findDado(C chave,LinkedList[] vet){
+        int indice = this.getIndice(chave);
+
+        if (this.vet[indice].isEmpty() == false) {
+            int pos = 0;
+            
+            while (pos < vet[indice].size()) {
+                RegDados dado = this.vet[indice].get(pos);
+                if (dado != null && dado.getChave().equals(chave)) {
+                    return dado;
+                }
+                pos++;
             }
-            pos++;
         }
         return null;
     }
     
-    public RegDados remove(Object o){
-        RegDados aux = find(o);
-        
-        if(aux == null){
+    private V find(C chave){
+        RegDados<C,V> dado = this.findDado(chave);
+        if (dado == null){
             return null;
         }else{
-            int indice = this.getIndice(o);
-            int pos = 0;
-            while(pos < vet[indice].size()){ //enquanto não acabar a lista
-                if (((RegDados)(vet[indice].get(pos))).getChave().equals(o)) // se encontrou o dado na lista
-                    break;
-                pos++;
-            }
-            
-            vet[indice].remove(pos);
-            qnt_entradas--;
-            return aux;
+            return dado.getValor();
         }
     }
     
+
+    public V remove(C chave){
+        RegDados<C,V> dado = this.findDado(chave);
+        if (dado == null){
+            return null;
+        }else{
+            int indice = this.getIndice(chave);
+            vet[indice].remove(dado);
+            qnt_entradas--;
+            
+            return dado.getValor();
+        }
+    }
+ 
     public Integer[] getColisoes(){
         Integer[] colisoes = new Integer[this.vet.length]; 
         for(int i=0; i < this.vet.length; i++){
@@ -105,7 +117,7 @@ public class TADDic {
     }
     
     public void showall(){
-        for (LinkedList linkedListReg : vet) {
+        for (LinkedList linkedListReg : this.vet) {
             for (Object object : linkedListReg) {
                 System.out.printf("%s\n",object.toString());
             }
@@ -115,24 +127,30 @@ public class TADDic {
     
     private void redimesionar(int tam) {
         
-        //criar o vetor de tamanho "tam" com as listas
-        //popular este vetor com o vetor antigo
-        //sobreescrever o vetor antigo pelo novo
         
-        LinkedList[] auxVet = new LinkedList[tam];
-        int indice;
+        LinkedList<RegDados>[] auxVet = new LinkedList[tam];
+        int qnt_val = 0;
         
         for(int i = 0; i < tam; i++){
-            auxVet[i] = new LinkedList<>(); //para cada casa do vetor cria uma lista de "RegDados"
+            auxVet[i] = new LinkedList<RegDados>();
         }
         
-        for (LinkedList pai : this.vet){
-            for (Object filho : pai) {
-                indice = this.getIndice(filho);
-                auxVet[indice].add((RegDados)filho); // adiciona ele no vetor em que se encontra
+        for (LinkedList<RegDados> pai : this.vet){
+            for (RegDados filho : pai) {
+                
+                C chave = (C)filho.getChave();
+                V valor = (V)filho.getValor();
+                
+                int indice = this.getIndice(chave,auxVet);
+                auxVet[indice].add(new RegDados(chave,valor));
+                qnt_val++;
+
             }
         }
         
+        // deveria dar um drop no vetor antigo?
+        
+        this.qnt_entradas = qnt_val;
         this.vet = auxVet;
         this.size = tam;
         

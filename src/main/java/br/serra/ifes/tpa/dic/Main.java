@@ -14,9 +14,10 @@ public class Main {
         Falta Plota no grafico
     */
     public static void main(String[] args){
-    	TADDic dic = new TADDic(10); 
+        
+    	TADDic<String,String> dic = new TADDic<String,String>(10); 
         /*
-        Arquivo arquivo = new Arquivo("C:\\Users\\luizg\\Documents\\NetBeansProjects\\TPA_meaven\\src\\main\\java\\br\\serra\\ifes\\tpa\\dic\\arquivo.txt"); //cria a classe arquivo com parametro do caminho do arquivo
+        Arquivo arquivo = new Arquivo("C:\\Users\\luizg\\Documents\\NetBeansProjects\\TPA_meaven\\src\\main\\java\\br\\serra\\ifes\\tpa\\dic\\arquivo.txt");
         try{
             arquivo.lerArquivo(dic); //tenta ler o arquivo
         } catch (IOException e) {
@@ -27,17 +28,17 @@ public class Main {
         
 		
         
-        dic.insert("home", new RegDados("home", "casa"));
-        dic.insert("﻿the", new RegDados("﻿the", "o,a,os,as"));
-        dic.insert("of", new RegDados("of", "de"));
-        dic.insert("to", new RegDados("to", "para"));
-        dic.insert("KeyBoard", new RegDados("KeyBoard", "teclado"));
-        dic.insert("a", new RegDados("a", "um,uma"));
-        dic.insert("in", new RegDados("in", "em,dentro"));
-        dic.insert("is", new RegDados("is", "é"));
-        dic.insert("it", new RegDados("it", "este"));
-        dic.insert("you", new RegDados("you", "você"));
-        dic.insert("that", new RegDados("that", "que,aquele"));
+        dic.insert("home", "casa");
+        dic.insert("﻿the", "o,a,os,as");
+        dic.insert("of", "de");
+        dic.insert("to", "para");
+        dic.insert("KeyBoard", "teclado");
+        dic.insert("a","um,uma");
+        dic.insert("in","em,dentro");
+        dic.insert("is","é");
+        dic.insert("it","este");
+        dic.insert("you","você");
+        dic.insert("that","que,aquele");
         
         
         
@@ -47,7 +48,7 @@ public class Main {
         System.out.println(Arrays.toString(dic.getColisoes()));
         
         System.out.println("\n");
-        dic.insert("Casa", new RegDados("Casa", "Home"));
+        dic.insert("Casa", "Home");
         
         System.out.printf("quantElement:%d \n",dic.quant_element());
         System.out.printf("Size: %d \n",dic.getSize());
