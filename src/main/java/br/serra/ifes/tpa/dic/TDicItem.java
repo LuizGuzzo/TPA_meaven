@@ -4,12 +4,12 @@ package br.serra.ifes.tpa.dic;
  *
  * @author luizg
  */
-public class RegDados<C,V> {
+public class TDicItem<C,V> {
     
     private C chave; 
     private V valor;
 
-    public RegDados(C chave, V valor) {
+    public TDicItem(C chave, V valor) {
         this.chave = chave;
         this.valor = valor;
     }
@@ -33,7 +33,7 @@ public class RegDados<C,V> {
     @Override
     public String toString(){
         String key = (String) chave;
-        String val = (String) valor;
+        String val = (String) valor.toString();
         return "chave:"+key+" / valor: "+val;
     }
 }

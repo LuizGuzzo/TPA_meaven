@@ -23,7 +23,8 @@ public class Arquivo {
             String[] array_split;
             while((linha = br.readLine()) != null){
                 array_split = linha.split(";");
-                dic.insert(array_split[0], new RegDados(array_split[0], array_split[1]));
+                Traduzir_IGtoPT traducao = new Traduzir_IGtoPT(array_split[0],array_split[1]);
+                dic.insert(array_split[0], traducao);
             }
         }
     }

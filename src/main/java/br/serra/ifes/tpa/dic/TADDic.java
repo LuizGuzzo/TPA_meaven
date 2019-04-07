@@ -9,7 +9,7 @@ import java.util.*;
  * @author luizg
  */
 public class TADDic<C,V> {
-    private LinkedList<RegDados>[] vet = null;
+    private LinkedList<TDicItem>[] vet = null;
     private int qnt_entradas = 0;
     private int size = 0;
     private HashEngine hashEngine;
@@ -30,7 +30,7 @@ public class TADDic<C,V> {
         this.hashEngine = hashEngine;
         this.vet = new LinkedList[n];
         for(int i = 0; i < n; i++){
-            vet[i] = new LinkedList<RegDados>();
+            vet[i] = new LinkedList<TDicItem>();
         }
     }
     
@@ -48,7 +48,7 @@ public class TADDic<C,V> {
         
     public void insert(C chave, V valor){
         int indice = this.getIndice(chave);
-        this.vet[indice].add(new RegDados(chave,valor));
+        this.vet[indice].add(new TDicItem(chave,valor));
         this.qnt_entradas++;
         if(qnt_entradas >= (this.size*0.9)){
             this.redimesionar(size*2);
@@ -56,18 +56,18 @@ public class TADDic<C,V> {
     }
     
 
-    private RegDados<C,V> findDado(C chave){
+    private TDicItem<C,V> findDado(C chave){
         return findDado(chave,this.vet);
     }
     
-    private RegDados<C,V> findDado(C chave,LinkedList[] vet){
+    private TDicItem<C,V> findDado(C chave,LinkedList[] vet){
         int indice = this.getIndice(chave);
 
         if (this.vet[indice].isEmpty() == false) {
             int pos = 0;
             
             while (pos < vet[indice].size()) {
-                RegDados dado = this.vet[indice].get(pos);
+                TDicItem dado = this.vet[indice].get(pos);
                 if (dado != null && dado.getChave().equals(chave)) {
                     return dado;
                 }
@@ -78,7 +78,7 @@ public class TADDic<C,V> {
     }
     
     private V find(C chave){
-        RegDados<C,V> dado = this.findDado(chave);
+        TDicItem<C,V> dado = this.findDado(chave);
         if (dado == null){
             return null;
         }else{
@@ -88,7 +88,7 @@ public class TADDic<C,V> {
     
 
     public V remove(C chave){
-        RegDados<C,V> dado = this.findDado(chave);
+        TDicItem<C,V> dado = this.findDado(chave);
         if (dado == null){
             return null;
         }else{
@@ -117,9 +117,9 @@ public class TADDic<C,V> {
     }
     
     public void showall(){
-        for (LinkedList linkedListReg : this.vet) {
-            for (Object object : linkedListReg) {
-                System.out.printf("%s\n",object.toString());
+        for (LinkedList<TDicItem> linkedListReg : this.vet) {
+            for (TDicItem data : linkedListReg) {
+                System.out.printf("%s\n",data.toString());
             }
         }
     }
@@ -128,21 +128,21 @@ public class TADDic<C,V> {
     private void redimesionar(int tam) {
         
         
-        LinkedList<RegDados>[] auxVet = new LinkedList[tam];
+        LinkedList<TDicItem>[] auxVet = new LinkedList[tam];
         int qnt_val = 0;
         
         for(int i = 0; i < tam; i++){
-            auxVet[i] = new LinkedList<RegDados>();
+            auxVet[i] = new LinkedList<TDicItem>();
         }
         
-        for (LinkedList<RegDados> pai : this.vet){
-            for (RegDados filho : pai) {
+        for (LinkedList<TDicItem> pai : this.vet){
+            for (TDicItem filho : pai) {
                 
                 C chave = (C)filho.getChave();
                 V valor = (V)filho.getValor();
                 
                 int indice = this.getIndice(chave,auxVet);
-                auxVet[indice].add(new RegDados(chave,valor));
+                auxVet[indice].add(new TDicItem(chave,valor));
                 qnt_val++;
 
             }

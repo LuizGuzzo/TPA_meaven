@@ -15,18 +15,8 @@ public class Main {
     */
     public static void main(String[] args){
         
-    	TADDic<String,String> dic = new TADDic<String,String>(10); 
-        /*
-        Arquivo arquivo = new Arquivo("C:\\Users\\luizg\\Documents\\NetBeansProjects\\TPA_meaven\\src\\main\\java\\br\\serra\\ifes\\tpa\\dic\\arquivo.txt");
-        try{
-            arquivo.lerArquivo(dic); //tenta ler o arquivo
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Arquivo Não Lido");
-        }
-        */
+    	TADDic<Object,Object> dic = new TADDic<Object,Object>(10); 
         
-		
         
         dic.insert("home", "casa");
         dic.insert("﻿the", "o,a,os,as");
@@ -40,23 +30,34 @@ public class Main {
         dic.insert("you","você");
         dic.insert("that","que,aquele");
         
+        printData(dic);
         
+        popular(dic);
         
-        //dic.showall();
-        System.out.printf("quantElement:%d \n",dic.quant_element());
-        System.out.printf("Size: %d \n",dic.getSize());
-        System.out.println(Arrays.toString(dic.getColisoes()));
-        
-        System.out.println("\n");
+	System.out.println("\n");
         dic.insert("Casa", "Home");
         
+        printData(dic);        	
+        
+        //dic.showall();
+        //teste();
+    }
+    
+    
+    public static void printData(TADDic<Object,Object> dic){
         System.out.printf("quantElement:%d \n",dic.quant_element());
         System.out.printf("Size: %d \n",dic.getSize());
         System.out.println(Arrays.toString(dic.getColisoes()));
-        
-
-
-        //teste();
+    }
+    
+    public static void popular(TADDic<Object,Object> dic){
+        Arquivo arquivo = new Arquivo("C:\\Users\\luizg\\Documents\\NetBeansProjects\\TPA_meaven\\src\\main\\java\\br\\serra\\ifes\\tpa\\dic\\arquivo.txt");
+        try{
+            arquivo.lerArquivo(dic); //tenta ler o arquivo
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Arquivo Não Lido");
+        }
     }
     
     public static void teste(){

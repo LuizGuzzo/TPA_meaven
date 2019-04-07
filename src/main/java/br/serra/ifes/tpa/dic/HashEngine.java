@@ -4,6 +4,12 @@ package br.serra.ifes.tpa.dic;
  *
  * @author luizg
  */
-public interface HashEngine {
-    long gerarHash(Object o);
+public abstract class HashEngine {
+    public long gerarHash(Object o){
+        long hash = 0;
+        for (int i = 0; i < o.toString().length(); i++) {
+            hash = hash + (int)o.toString().charAt(i);
+        }
+        return hash;
+    }
 }

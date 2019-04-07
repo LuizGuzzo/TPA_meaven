@@ -4,7 +4,7 @@ package br.serra.ifes.tpa.dic;
  *
  * @author luizg
  */
-public class HashEngineInicial implements HashEngine {
+public class HashEngineInicial extends HashEngine {
     @Override
     public long gerarHash(Object o) {
         long hash = 0;
