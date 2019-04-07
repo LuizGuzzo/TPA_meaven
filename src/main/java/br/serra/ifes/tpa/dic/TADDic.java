@@ -1,5 +1,8 @@
 
 package br.serra.ifes.tpa.dic;
+import com.github.sh0nk.matplotlib4j.Plot;
+import com.github.sh0nk.matplotlib4j.PythonExecutionException;
+import java.io.IOException;
 import java.util.*;
 /**
  *
@@ -8,16 +11,18 @@ import java.util.*;
 public class TADDic {
     private LinkedList[] vet = null;
     private int qnt_entradas = 0;
+    private int size = 0;
     private HashEngine hashEngine;
     
     public TADDic() {
-        this.StartTADDic(256, new HashEngineInicial());
+        this.size = 256;
+        this.StartTADDic(size, new HashEngineInicial());
     }
     
     public TADDic(int n) {
         double fc = 0.75;
-        int len = (int)(n/fc);
-        this.StartTADDic(len, new HashEngineInicial()); //fator de carga
+        this.size = (int)(n/fc);
+        this.StartTADDic(size, new HashEngineInicial()); //fator de carga
     }
     
     private void StartTADDic(int n, HashEngine hashEngine) {
@@ -40,11 +45,15 @@ public class TADDic {
     }
 
     public void insert(Object o, Object reg){
-        RegDados aux = find(o); //carrega o object correspondente a key
+        //RegDados aux = find(o); //carrega o object correspondente a key, se encontrar adiciona nele (para fazer o replace automatico)
         int indice = this.getIndice(o); //pega o indice correspondente a este object
         vet[indice].add((RegDados)reg); // adiciona ele no vetor em que se encontra
         qnt_entradas++;
         
+        // se o tamanho de inserção estiver chegando no tamanho maximo ele redimensiona
+        if(qnt_entradas >= (size*0.9)){
+            redimesionar(size*2);
+        }
     }
     
     public RegDados find(Object o){
@@ -79,8 +88,8 @@ public class TADDic {
         }
     }
     
-    public int[] getColisoes(){
-        int[] colisoes = new int[this.vet.length]; 
+    public Integer[] getColisoes(){
+        Integer[] colisoes = new Integer[this.vet.length]; 
         for(int i=0; i < this.vet.length; i++){
             colisoes[i] = this.vet[i].size();
         }
@@ -91,8 +100,8 @@ public class TADDic {
         return qnt_entradas;
     }
     
-    public int tamVet(){
-        return vet.length;
+    public int getSize(){
+        return this.size;
     }
     
     public void showall(){
@@ -101,5 +110,32 @@ public class TADDic {
                 System.out.printf("%s\n",object.toString());
             }
         }
+    }
+    
+    
+    private void redimesionar(int tam) {
+        
+        //criar o vetor de tamanho "tam" com as listas
+        //popular este vetor com o vetor antigo
+        //sobreescrever o vetor antigo pelo novo
+        
+        LinkedList[] auxVet = new LinkedList[tam];
+        int indice;
+        
+        for(int i = 0; i < tam; i++){
+            auxVet[i] = new LinkedList<>(); //para cada casa do vetor cria uma lista de "RegDados"
+        }
+        
+        for (LinkedList pai : this.vet){
+            for (Object filho : pai) {
+                indice = this.getIndice(filho);
+                auxVet[indice].add((RegDados)filho); // adiciona ele no vetor em que se encontra
+            }
+        }
+        
+        this.vet = auxVet;
+        this.size = tam;
+        
+        
     }
 }
