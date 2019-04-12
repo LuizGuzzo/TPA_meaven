@@ -50,11 +50,21 @@ public class TADDic<C,V> {
         int indice = this.getIndice(chave);
         this.vet[indice].add(new TDicItem(chave,valor));
         this.qnt_entradas++;
-        if(qnt_entradas >= (this.size*0.9)){
+        
+        if(check_size_bucket()){
             this.redimesionar(size*2);
         }
     }
     
+    private boolean check_size_bucket(){
+        int maxSize = 0;
+        for (LinkedList<TDicItem> linkedList : vet) {
+            if(linkedList.size() > maxSize){
+                maxSize = linkedList.size();
+            }
+        }
+        return (maxSize >= size*0.3) ? true : false;
+    }
 
     private TDicItem<C,V> findDado(C chave){
         return findDado(chave,this.vet);
@@ -153,7 +163,18 @@ public class TADDic<C,V> {
         this.qnt_entradas = qnt_val;
         this.vet = auxVet;
         this.size = tam;
-        
-        
+    }
+    
+    public void showCollisionsDiagram() {
+        Plot plot = Plot.create();
+        plot.plot().add(Arrays.asList(this.getColisoes()));
+        plot.xlabel("indice da lista");
+        plot.ylabel("Quantidade de entradas");
+        plot.title("Colisoes");
+        try {
+            plot.show();
+        } catch (PythonExecutionException | IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -11,7 +11,9 @@ import java.util.logging.Logger;
  */
 public class Main {
     /*
-        Falta Plota no grafico
+        criar um noSuchKey
+        mudar a cara do grafico pq ele ta fei bagarai
+        criar mais metodos de HASH
     */
     public static void main(String[] args){
         
@@ -40,7 +42,7 @@ public class Main {
         printData(dic);        	
         
         //dic.showall();
-        //teste();
+        dic.showCollisionsDiagram();
     }
     
     
@@ -60,23 +62,5 @@ public class Main {
         }
     }
     
-    public static void teste(){
-        Plot plt = Plot.create();
-        plt.plot()
-            .add(Arrays.asList(1.3, 2))
-            .label("label")
-            .linestyle("--");
-        plt.xlabel("xlabel");
-        plt.ylabel("ylabel");
-        plt.text(0.5, 0.2, "text");
-        plt.title("Title!");
-        plt.legend();
-        try {
-            plt.show();
-        } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (PythonExecutionException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    
 }
