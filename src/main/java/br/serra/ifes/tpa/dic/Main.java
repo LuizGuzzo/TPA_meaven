@@ -1,10 +1,6 @@
 package br.serra.ifes.tpa.dic;
-import com.github.sh0nk.matplotlib4j.Plot;
-import com.github.sh0nk.matplotlib4j.PythonExecutionException;
 import java.io.IOException;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 /**
  *
  * @author luizg
@@ -14,10 +10,11 @@ public class Main {
         criar um noSuchKey
         mudar a cara do grafico pq ele ta fei bagarai
         criar mais metodos de HASH
+        fazer varios graficos de comparação de organização em hash, e salva-los em uma pasta
     */
     public static void main(String[] args){
         
-    	TADDic<Object,Object> dic = new TADDic<Object,Object>(10); 
+    	TADDic<Object,Object> dic = new TADDic<Object,Object>(100); 
         
         
         dic.insert("home", "casa");
@@ -33,16 +30,20 @@ public class Main {
         dic.insert("that","que,aquele");
         
         printData(dic);
-        
+        //dic.showCollisionsDiagram();
         popular(dic);
         
 	System.out.println("\n");
         dic.insert("Casa", "Home");
         
         printData(dic);        	
+        System.out.println("\n");
+        TADDic<Object,Object> dic_clone = dic.clone();
+        printData(dic_clone);
         
         //dic.showall();
         dic.showCollisionsDiagram();
+        dic_clone.showCollisionsDiagram();
     }
     
     
