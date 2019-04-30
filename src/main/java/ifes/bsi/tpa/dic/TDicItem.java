@@ -1,15 +1,16 @@
-package br.serra.ifes.tpa.dic;
+package ifes.bsi.tpa.dic;
 
 /**
  *
  * @author luizg
  */
-public class RegDados {
-    /*se for para tratar isso como Object é so converter td por obj, mas no momento estou querendo mostrar o funcionamento logo estou deixando como string*/
+public class TDicItem {
+    
     private Object chave; 
     private Object valor;
+    private long cach_hash;  //pra q serve isso?
 
-    public RegDados(Object chave, Object valor) {
+    public TDicItem(Object chave, Object valor) {
         this.chave = chave;
         this.valor = valor;
     }
@@ -30,10 +31,19 @@ public class RegDados {
         this.valor = valor;
     }
 
+    public long getCach_hash() {
+        return cach_hash;
+    }
+
+    public void setCach_hash(long cach_hash) {
+        this.cach_hash = cach_hash;
+    }
+
+
     @Override
     public String toString(){
         String key = (String) chave;
-        String val = (String) valor;
-        return "chave:"+key+" / valor: "+val;
+        String val = (String) valor.toString();
+        return "chave:"+key+" / valor: "+val+ "/ cach: "+cach_hash;
     }
 }

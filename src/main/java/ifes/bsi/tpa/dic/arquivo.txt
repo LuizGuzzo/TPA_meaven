@@ -997,4 +997,4 @@ quotient	;	quociente
 teeth	;	dentes			
 shell	;	concha			
 neck	;	pescoço			
-dessert	;	sobremesa			
+dessert	;	sobremesa			z

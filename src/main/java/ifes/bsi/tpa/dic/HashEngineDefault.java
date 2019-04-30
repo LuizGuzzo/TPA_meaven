@@ -1,12 +1,11 @@
-package br.serra.ifes.tpa.dic;
+package ifes.bsi.tpa.dic;
 
 /**
  *
  * @author luizg
  */
-public class HashEngineInicial implements HashEngine {
-    @Override
-    public long gerarHash(Object o) {
+public abstract class HashEngineDefault {
+    public long hash_func(Object o){
         long hash = 0;
         for (int i = 0; i < o.toString().length(); i++) {
             hash = hash + (int)o.toString().charAt(i);
