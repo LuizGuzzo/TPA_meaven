@@ -1,4 +1,4 @@
-package br.serra.ifes.tpa.dic;
+package ifes.bsi.tpa.dic.aplication;
 
 /**
  *

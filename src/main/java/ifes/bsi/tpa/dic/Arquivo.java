@@ -1,5 +1,6 @@
-package br.serra.ifes.tpa.dic;
+package ifes.bsi.tpa.dic;
 
+import ifes.bsi.tpa.dic.aplication.Traduzir_IGtoPT;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -17,14 +18,14 @@ public class Arquivo {
         this.localArquivo = localArquivo;
     }
     
-    public void lerArquivo(TADDic dic) throws IOException {
+    public void lerArquivo(TADDicChain dic) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(localArquivo))) {
             String linha;
             String[] array_split;
             while((linha = br.readLine()) != null){
                 array_split = linha.split(";");
                 Traduzir_IGtoPT traducao = new Traduzir_IGtoPT(array_split[0],array_split[1]);
-                dic.insert(array_split[0], traducao);
+                dic.insertItem(array_split[0], traducao);
             }
         }
     }
