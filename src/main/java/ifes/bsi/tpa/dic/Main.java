@@ -1,4 +1,5 @@
 package ifes.bsi.tpa.dic;
+import ifes.bsi.tpa.dic.aplication.Hash_engine;
 import java.io.IOException;
 import java.util.*;
 /**
@@ -11,8 +12,8 @@ public class Main {
         fazer varios graficos de comparação de organização em hash, e salva-los em uma pasta
     */
     public static void main(String[] args){
-        
-    	TADDicChain dic = new TADDicChain(10); 
+        Hash_engine hash_engine = new Hash_engine();
+    	TADDicChain dic = new TADDicChain(10,hash_engine); 
         
         
         dic.insertItem("home", "casa");
@@ -57,7 +58,11 @@ public class Main {
 
 
         System.out.printf(" Equals: "+ dic.equals(dic_clone) +"\n");
-
+        
+//        System.out.println("keys:");
+//        System.out.println(Arrays.toString(dic.keys()));
+//        System.out.println("Elements:");
+//        System.out.println(Arrays.toString(dic.elements()));
         
 //        dic.showall();
 //        System.out.println("\n");

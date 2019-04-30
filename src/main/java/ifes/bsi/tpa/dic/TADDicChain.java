@@ -16,11 +16,6 @@ import java.util.*;
 ToDo:
 Keys();
 elements();
-equals();
-
-estrategia do hash;
-resize();
-    
 */
 public class TADDicChain {
     private LinkedList<TDicItem>[] vet = null;
@@ -167,19 +162,28 @@ public class TADDicChain {
     public boolean NO_SUCH_KEY(){
         return this.achou;
     }
-/*
-    public LinkedList[] keys(){
-        LinkedList<TDicItem>[] lista = null;
-        // retornar a collections de apenas Keys
-        return lista;
+
+    public LinkedList keys(){
+        LinkedList chaves = new LinkedList();
+        for (LinkedList<TDicItem> buckets : this.vet) {
+            for (TDicItem filho : buckets) {
+                chaves.add(filho.getChave());
+            }
+        }
+        return chaves;
     }
+    
     //
-    public LinkedList[] elements(){
-        LinkedList<TDicItem>[] lista = null;
-        // retornar a collections de apenas os elementos
-        return lista;
+    public LinkedList elements(){
+        LinkedList valor = new LinkedList();
+        for (LinkedList<TDicItem> buckets : this.vet) {
+            for (TDicItem filho : buckets) {
+                valor.add(filho.getValor());
+            }
+        }
+        return valor;
     }
- */
+
     public TADDicChain clone(){
         return clone(this.size,this.hashEngine);
     }
