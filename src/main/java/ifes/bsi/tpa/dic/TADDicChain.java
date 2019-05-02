@@ -225,7 +225,7 @@ public class TADDicChain {
     }
 
     public TADDicChain clone(){
-        return clone(this.size,this.hashEngine);
+        return clone(this.getSizeVetBuckets(),this.getHashEngine());
     }
     
     private TADDicChain clone(int size, HashEngineDefault hashEngine){
@@ -243,16 +243,13 @@ public class TADDicChain {
     //percorrer todo o vetor e todas as listas dos vetores comparando todos os dados
 
 
-    @Override
-    public boolean equals(Object obj) {
-        
-        TADDicChain dic2 = (TADDicChain) obj;
-
-        
+    
+    public boolean equals(TADDicChain dic2) {
+//        System.out.println("equals start");
         if(this.getHashEngine().equals(dic2.getHashEngine())){
-            //System.out.printf("teste: 1 | qnt_ent1: "+ this.size() +"|qnt_ent2: "+ dic2.size() +"\n");
+//            System.out.printf("teste: 1 | qnt_ent1: "+ this.size() +"|qnt_ent2: "+ dic2.size() +"\n");
             if(this.size() == dic2.size()){
-                
+//                System.out.println("size approved");
                 for (LinkedList<TDicItem> pai : vetBuckets) {
                     for (TDicItem filho : pai) {
                         
@@ -262,7 +259,7 @@ public class TADDicChain {
                         
                         Object val2 = dic2.findElement(chave); 
                         
-                        if(!dic2.NO_SUCH_KEY()){ //se o find não encontrou a key
+                        if(dic2.NO_SUCH_KEY()){ //se o find não encontrou a key
                             return false;
                         }else{
                             
