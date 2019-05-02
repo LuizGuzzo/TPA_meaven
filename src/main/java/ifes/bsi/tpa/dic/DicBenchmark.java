@@ -7,6 +7,14 @@ import java.util.Map;
 import java.util.Set;
 
 import _my_tools.*;
+import static ifes.bsi.tpa.dic.Main.printData;
+import java.util.Arrays;
+
+/*
+bugs relatados:
+caminho não encontrado
+
+*/
 
 class RegMD {
 	private String cpf;
@@ -49,13 +57,19 @@ class RegMD {
 	public boolean equals(RegMD r) {
 		return (cpf == r.getCpf()) && (nome == r.getNome()) && (end == r.getEnd()) && (cel == r.getCel());
 	}
+
+    @Override
+    public String toString() {
+        return "RegMD{" + "cpf=" + cpf + ", nome=" + nome + ", end=" + end + ", cel=" + cel + '}';
+    }
+        
 } /* fim RegMD */
 
 public class DicBenchmark {
 	public static void main(String[] args) {
 		int TAM_TESTE = 50000;
 		TADDicChain dicA = new TADDicChain();
-		ArquivoTxt arqIn = ArquivoTxt.open("./src/ifes/bsi/tpa/dic/maladireta.csv", "rt");
+		ArquivoTxt arqIn = ArquivoTxt.open("C:\\Users\\luizg\\Documents\\NetBeansProjects\\TPA_meaven\\src\\main\\java\\ifes\\bsi\\tpa\\dic\\maladireta.csv", "rt");
 		
 		HashMap<Object, Object> hm = new HashMap<Object, Object>();
 		
@@ -97,7 +111,13 @@ public class DicBenchmark {
 		
 		LinkedList<Object> lstKs = dicA.keys();
 		
-		int i = 0;
+		int i =0;
+//                printData(dicA);
+//                
+//                for(int z = 0; z < 10; z++) {
+//                    System.out.printf(""+ lstKs.get(z).toString() +" ");
+//                }
+                
 		while(dicA.size() > 0) {
 			RegMD dado = (RegMD)dicA.removeElement(lstKs.get(i));
 			if(dicA.NO_SUCH_KEY()) {

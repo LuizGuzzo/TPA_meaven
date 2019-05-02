@@ -31,7 +31,7 @@ public class Traduzir_IGtoPT {
 
     @Override
     public String toString() {
-        return "{" + "portugues=" + portugues + ", ingles=" + ingles + "}";
+        return "{" + "portugues=" + portugues + "| ingles=" + ingles + "}";
     }
     
     

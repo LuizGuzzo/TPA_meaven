@@ -24,7 +24,7 @@ public class Arquivo {
             String[] array_split;
             while((linha = br.readLine()) != null){
                 array_split = linha.split(";");
-                Traduzir_IGtoPT traducao = new Traduzir_IGtoPT(array_split[0],array_split[1]);
+                Traduzir_IGtoPT traducao = new Traduzir_IGtoPT(array_split[0].trim(),array_split[1].trim());
                 dic.insertItem(array_split[0], traducao);
             }
         }

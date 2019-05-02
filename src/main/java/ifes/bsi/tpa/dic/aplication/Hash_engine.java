@@ -6,6 +6,7 @@ import ifes.bsi.tpa.dic.HashEngineDefault;
  *
  * @author luizg
  */
+//era essa que deveria ser abstrata..
 public class Hash_engine extends HashEngineDefault {
     
     //@Override
