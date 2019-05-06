@@ -12,17 +12,18 @@ public class Main {
         
         fazer varios graficos de comparação de organização em hash, e salva-los em uma pasta
     */
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException{
         
         TADMatrizEsp tadMz = new TADMatrizEsp(2,6);
-        TADMatrizEsp tadMz2 = new TADMatrizEsp(6,3);
+        TADMatrizEsp tadMz3 = new TADMatrizEsp(2,6);
+        
         tadMz.DicToMatriz();
-        tadMz2.DicToMatriz();
-        tadMz.printMatriz();
-        System.out.println("");
-        tadMz2.printMatriz();
-        System.out.println("");
-        tadMz.mult(tadMz2);
+        tadMz3.DicToMatriz();
+        
+        tadMz.salvar("matriz");
+        
+        
+        System.out.printf("Equals:"+ tadMz.equals(tadMz3));
         
         
         

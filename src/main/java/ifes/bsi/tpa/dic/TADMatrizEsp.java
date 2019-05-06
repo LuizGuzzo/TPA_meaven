@@ -5,6 +5,10 @@
  */
 package ifes.bsi.tpa.dic;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 
 /**
@@ -36,13 +40,12 @@ public class TADMatrizEsp {
         return mz;
     }
     
+    // retorna um novo TADMatrizEsp resultado da multiplicação da matriz atual (this) pela argumento m
     public TADMatrizEsp mult(TADMatrizEsp m){
         double[][] a = this.getMz();
         double[][] b = m.getMz();
         double aux;
-        /* 
-        retorna um novo TADMatrizEsp resultado da multiplicação da matriz atual (this) pela argumento m
-        */
+        
         if(this.getColunas() == m.getLinhas()){ // acredito que exista uma garantia melhor do q ser identico (se sim atualize o metodo)
             
             linhas = (this.getLinhas()> m.getLinhas())? m.getLinhas(): this.getLinhas();
@@ -67,7 +70,7 @@ public class TADMatrizEsp {
                 
             
             this.mz = c;
-            printMatriz();
+//            printMatriz();
             TADMatrizEsp tadMatrizEsp = new TADMatrizEsp(this.getLinhas(),this.getColunas());
             tadMatrizEsp.setMz(c);
             return tadMatrizEsp;
@@ -78,11 +81,23 @@ public class TADMatrizEsp {
         return null;
     }
 
-    public String salvar (String nome_arq){
+    public void salvar (String nome_arq) throws IOException{
         /*
         salva a matriz corrente (this) em um arquivo texto de nome nome_arq cada linha do arquivo deve ser uma linha da matriz
         */
-        return null;
+        BufferedWriter buffWrite = new BufferedWriter(new FileWriter("C:\\Users\\luizg\\Documents\\NetBeansProjects\\TPA_meaven\\src\\main\\java\\ifes\\bsi\\tpa\\dic\\"+nome_arq+".txt"));
+        String linha = "";
+
+        double[][] c = this.mz;
+       
+        for (int i = 0; i < c.length; i++) {
+            for (int j = 0; j < c[i].length; j++) {
+                System.out.printf(c[i][j] + " ");
+                buffWrite.append(""+c[i][j]+" ");
+            }
+            buffWrite.append("/n"); //PORQUE NAO FUNCIONA
+        }
+        buffWrite.close();
     }
     
     public TADMatrizEsp carregar(String nome_arq){
@@ -91,12 +106,24 @@ public class TADMatrizEsp {
         */
         return null;
     }
-    
+//    retorna true se a matriz atual (this) for igual a matriz m, retorna false caso contrario. As matrizes são iguais se possuirem as mesmas dimensões e os mesmos contéudos nas posições x,y.
     public boolean equals(TADMatrizEsp m){
-        /*
-        retorna true se a matriz atual (this) for igual a matriz m, retorna false caso contrario. As matrizes são iguais se possuirem as mesmas dimensões e os mesmos contéudos nas posições x,y.
-        */
-        return false;
+        
+        double[][] a = this.getMz();
+        double[][] b = m.getMz();
+        
+        if(m.getLinhas() == this.getLinhas() && m.getColunas() == this.getColunas()){
+            for (int i = 0; i < this.getLinhas(); i++) {
+                for (int j = 0; j < this.getColunas(); j++) {
+//                    System.out.printf("a["+i+"]["+j+"]:"+a[i][j]+"| b["+i+"]["+j+"]:"+b[i][j]+"\n");
+                    if(a[i][j] != b[i][j]) return false;
+                }
+            }
+        
+            
+        }else return false;
+        
+        return true;
     }
     
     //to convertendo nada, to fazendo "rand" aqui só pra testa msm
