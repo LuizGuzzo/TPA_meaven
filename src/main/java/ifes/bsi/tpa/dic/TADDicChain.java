@@ -10,12 +10,9 @@ import java.util.*;
  * @author luizg
  */
 
-
-
 /*
 ToDo:
-Keys();
-elements();
+
 */
 public class TADDicChain {
     private LinkedList<TDicItem>[] vetBuckets = null;
@@ -65,11 +62,7 @@ public class TADDicChain {
         }else{//altera o valor para o novo
             tDicItem.setValor(valor);
         }
-        
-        
-        
     }
-    
 
     
     //insere dado no vetor do dic porem com redimensionamento
@@ -102,44 +95,7 @@ public class TADDicChain {
         }
     }
     
-//    public Object findoElement(Object chave){ //TESTE
-//        TDicItem dado = this.findoItem(chave,this.vetBuckets);
-//        if (dado == null){
-//            return null;
-//        }else{
-//            return dado.getValor();
-//        }
-//    }
-//    private TDicItem findoItem(Object chave,LinkedList[] vet){ // TESTE
-//        this.achou = false;
-//        int indice = this.getIndice(chave,vet);
-//        
-//        if (!this.vetBuckets[indice].isEmpty()) {
-//            int pos = 0;
-//            while (pos < vet[indice].size()) {
-//                TDicItem item = (TDicItem) vet[indice].get(pos);
-//                System.out.printf("indice: "+ indice +" | pos: "+ pos +" | item_chave: "+ item.getChave().toString() +" | chave: "+ chave.toString() +
-//                        "vet[indice].size = "+ vet[indice].size() +"\n");
-//                if (item != null && item.getChave().equals(chave)) {
-//                    System.out.println("GOTCHA");
-//                    this.achou = true;
-//                    return item;
-//                }
-//                pos++;
-//            }
-////            for (LinkedList<TDicItem> linkedList : vet) {
-////                for (TDicItem item : linkedList) {
-////                    if(item != null && item.getChave().equals(chave)){
-//////                        System.out.println("GOTCHA");
-////                        this.achou = true;
-////                        return item;
-////                    }
-////                }
-////            }
-//        }
-//        System.out.printf("objeto: "+ chave.toString() +" | não encontrada\n");
-//        return null;
-//    }
+
     
     private TDicItem findItem(Object chave,LinkedList[] vet){ // retorna o Item
         this.achou = false;
@@ -192,7 +148,7 @@ public class TADDicChain {
     }
      
     public boolean isEmpty(){
-        return (this.quant_entradas == 0)? true:false;
+        return this.quant_entradas == 0;
     }
     // isso daqui é o tamanho da quantidade de entradas
     public int size(){ 

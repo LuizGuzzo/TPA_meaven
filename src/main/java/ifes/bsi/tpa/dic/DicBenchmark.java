@@ -193,5 +193,7 @@ public class DicBenchmark {
 		System.out.println(" .elements();");
 		System.out.println(" .clone();");
 		System.out.println(" .equals();");		
+            dicB.showCollisionsDiagram();
+            dicC.showCollisionsDiagram();
 	} // fim main
 } // fim classe DicBenchmark
