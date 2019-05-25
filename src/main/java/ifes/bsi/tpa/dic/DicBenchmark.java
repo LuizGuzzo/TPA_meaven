@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import _my_tools.*;
-import static ifes.bsi.tpa.dic.Main.printData;
+import static ifes.bsi.tpa.dic.aplication.Main.printData;
 import java.util.Arrays;
 
 /*

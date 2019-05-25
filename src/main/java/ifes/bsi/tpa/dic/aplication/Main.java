@@ -1,4 +1,6 @@
-package ifes.bsi.tpa.dic;
+package ifes.bsi.tpa.dic.aplication;
+import ifes.bsi.tpa.dic.Arquivo;
+import ifes.bsi.tpa.dic.TADDicChain;
 import ifes.bsi.tpa.dic.aplication.Hash_engine;
 import ifes.bsi.tpa.dic.aplication.Traduzir_IGtoPT;
 import java.io.IOException;
