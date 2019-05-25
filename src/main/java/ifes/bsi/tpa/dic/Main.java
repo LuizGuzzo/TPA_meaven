@@ -14,16 +14,22 @@ public class Main {
     */
     public static void main(String[] args) throws IOException{
         
-        TADMatrizEsp tadMz = new TADMatrizEsp(2,6);
-        TADMatrizEsp tadMz3 = new TADMatrizEsp(2,6);
+        TADDicChain dic = new TADDicChain();
         
-        tadMz.DicToMatriz();
-        tadMz3.DicToMatriz();
+        dic.insertItem(null, null);
         
-        tadMz.salvar("matriz");
+        dic.showall();
         
-        
-        System.out.printf("Equals:"+ tadMz.equals(tadMz3));
+//        TADMatrizEsp tadMz = new TADMatrizEsp(2,6);
+//        TADMatrizEsp tadMz3 = new TADMatrizEsp(2,6);
+//        
+//        tadMz.DicToMatriz();
+//        tadMz3.DicToMatriz();
+//        
+//        tadMz.salvar("matriz");
+//        
+//        
+//        System.out.printf("Equals:"+ tadMz.equals(tadMz3));
         
         
         

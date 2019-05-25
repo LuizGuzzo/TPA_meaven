@@ -21,7 +21,7 @@ public class TADDicChain {
     private int quant_entradas = 0;
     private boolean achou = false;
     
-    private int size = 13; //lenght do vetor
+    private int size = 1024; //lenght do vetor
     private HashEngineDefault hashEngine;
     
     public TADDicChain() {
@@ -55,6 +55,7 @@ public class TADDicChain {
     }
     
     public void insertItem(Object chave, Object valor){
+        if(chave == null) return;
         TDicItem tDicItem = (TDicItem) this.findItem(chave,this.vetBuckets);
         if(this.NO_SUCH_KEY() == true){
             insertItem(chave,valor,this.vetBuckets);
@@ -247,7 +248,7 @@ public class TADDicChain {
     
     private void redimensiona() {
         
-        int tam = this.getSizeVetBuckets()*2;
+        int tam = (int) (this.getSizeVetBuckets()*1.5);
         
         LinkedList<TDicItem>[] vet_backup = this.inicia_vet(tam); //re-analizar
         vet_backup = vet_copy(vet_backup,this.vetBuckets);
@@ -257,27 +258,6 @@ public class TADDicChain {
         this.size = tam;
     }
     
-//    private void redimensionar() { //TESTE
-//
-//        int newTam = this.vetBuckets.length * 2;
-//        LinkedList<TDicItem>[] newDicionario = new LinkedList[newTam];
-//
-//        for (int i = 0; i < newTam; i++) {
-//            newDicionario[i] = new LinkedList<>();
-//        }
-//
-//        for (int j = 0; j < this.vetBuckets.length; j++) {
-//            if (this.vetBuckets[j] != null) {
-//                for (int k = 0; k < this.vetBuckets[j].size(); k++) {
-//                    Object key = this.vetBuckets[j].get(k).getChave();
-//                    int index = getIndice(key, this.vetBuckets);
-//                    newDicionario[index].add(this.vetBuckets[j].get(k));
-//                }
-//            }
-//        }
-//
-//        this.vetBuckets = newDicionario;
-//}
     
     private LinkedList[] vet_copy(LinkedList[] auxVet, LinkedList[] vet) {
             
@@ -302,7 +282,7 @@ public class TADDicChain {
                 maxSize = linkedList.size();
             }
         }
-        return (maxSize >= size*0.25);
+        return (maxSize >= size*0.30);
     }
 
     //Métodos não contidos na imagem de descrição
