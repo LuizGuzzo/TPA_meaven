@@ -40,7 +40,7 @@ public class TADMatriz {
         return mz;
     }
     
-    // retorna um novo TADMatriz resultado da multiplicação da matriz atual (this) pela argumento m
+    
     
     public void salvar (String nome_arq) throws IOException{
         /*
@@ -102,15 +102,7 @@ public class TADMatriz {
         
         this.mz = mz;
     }
-    /*
-    vou encher ela com o vetor de buckets?
-    se sim ficaria linkedlist como linha armazenando os buckets
-    e dentro de cada linha um outro linkedlist que seria os dados de cada coluna correspondente a linha X, sendo as listas dentro dos buckets :D
     
-    as linhas e colunas seriam definidas como:
-    linhas = vetBuckets.length
-    colunas = vetBuckets.maiorBucket()
-    */
 
    
     public Float[][] getMz() {
@@ -133,7 +125,10 @@ public class TADMatriz {
         }
     }
     
-    /*8888888888888888888888888888888888888888888888888888888888888888888888888888*/
+    /*Oque o professor pediu esta aqui em baixo (não testei ainda por motivos da documentação estar incompleta) ##################################################################################*/
+    
+    
+    // retorna um novo TADMatriz resultado da multiplicação da matriz atual (this) pela argumento m
     public TADMatriz multi(TADMatriz m){
         Float[][] a = this.getMz();
         Float[][] b = m.getMz();
@@ -198,7 +193,17 @@ public class TADMatriz {
     }
     
     public TADMatriz soma(TADMatriz m){
-        return null;
+        if(m.quantColunas() == this.quantColunas() && m.quantLinhas() == this.quantLinhas()){
+            TADMatriz newMatriz = new TADMatriz(this.quantLinhas(),this.quantColunas());
+            for (int i = 0; i < this.quantLinhas(); i++) {
+                for (int j = 0; j < this.quantColunas(); j++) {
+                    newMatriz.setElem(i, j, this.getElem(i, j) + m.getElem(i, j));
+                }
+            }
+            return newMatriz;
+        }else{
+            return null;
+        }
     }
     
     public void vezesK(Float k){
@@ -207,16 +212,22 @@ public class TADMatriz {
                 aFloat = aFloat*k;
     }
     
-    
-    
     public TADMatriz transposta(){
-        return null;
+        TADMatriz newMatriz = new TADMatriz(this.quantColunas(),this.quantLinhas());
+        for (int i = 0; i < this.quantLinhas(); i++) {
+            for (int j = 0; j < this.quantColunas(); j++) {
+                newMatriz.setElem(j, i, this.getElem(i, j));
+            }
+        }
+        return newMatriz;
     }
     
+    //To Make
     public static TADMatriz carrega(String nome_arq){
         return null;
     }
     
+    //To Make
     public String salva(String nome_arq){
         return null;
     }
