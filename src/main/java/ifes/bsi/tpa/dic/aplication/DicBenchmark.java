@@ -1,4 +1,4 @@
-package ifes.bsi.tpa.dic;
+package ifes.bsi.tpa.dic.aplication;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import _my_tools.*;
-import static ifes.bsi.tpa.dic.aplication.Main.printData;
+import ifes.bsi.tpa.dic.TADDicChain;
 import java.util.Arrays;
 
 /*
