@@ -6,6 +6,7 @@
 package ifes.bsi.tpa.dic.aplication;
 
 import ifes.bsi.tpa.matriz.TADMatriz;
+import java.io.IOException;
 
 /**
  *
@@ -16,7 +17,7 @@ public class mainMatriz {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         TADMatriz matriz = new TADMatriz(2, 3);
         matriz.setElem(1, 1, 1f);
         matriz.setElem(1, 2, 2f);
@@ -45,9 +46,14 @@ public class mainMatriz {
         mainMatriz.print(matriz4,"Soma");
         mainMatriz.print(matriz5,"Multi");
         
+        TADMatriz matrizCarregada = null;
+                matrizCarregada = matrizCarregada.carrega("C:\\Users\\luizg\\Documents\\NetBeansProjects\\TPA_meaven\\src\\main\\java\\ativ-1-tpa-taddic\\bdmatrizes\\A.txt");
+        
+        mainMatriz.print(matrizCarregada, "Carregada");
+            matrizCarregada.salva("teste");
         
         
-        matriz.imprimeDados();
+        matrizCarregada.imprimeDados();
     }
     
     public static void print(TADMatriz m, String type){
@@ -60,5 +66,7 @@ public class mainMatriz {
             System.out.println("======================");
         }
     }
+    
+    
     
 }

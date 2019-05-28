@@ -6,13 +6,18 @@
 package ifes.bsi.tpa.matriz;
 
 import ifes.bsi.tpa.dic.TADDicChain;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -25,7 +30,10 @@ public class TADMatriz {
     private TADDicChain dados; //armazena os dados que a matriz recebe
     private List<ChaveMatriz> chaves; //é a lista de "tuplas" das chaves
     
-
+    public TADMatriz(){
+        this(100,100);
+    }
+    
     public TADMatriz(int linhas, int colunas) {
         this.linhas = linhas;
         this.colunas = colunas;
@@ -142,12 +150,89 @@ public class TADMatriz {
         
     }
     
-    //To Make
-    public static TADMatriz carrega(String nome_arq){
+    //CAOS TOTAL
+    public static TADMatriz carrega(String nome_arq,int l, int c) throws FileNotFoundException, IOException{
+        
         /*
-        carrega uma matriz a partir de um arquivo texto de nome "nome_arq" O arquivo tem o formato descrito no metodo "Salvar" (metodo acima). O me´todo retorna uma matriz povoada pelos dados do arquivo
+        carrega uma matriz a partir de um arquivo texto de nome "nome_arq" O arquivo tem o
+        formato descrito no metodo "Salvar" (metodo acima). O me´todo retorna uma matriz povoada pelos dados do arquivo
         */
-        return null;
+        
+        BufferedReader buffRead = new BufferedReader(new FileReader(nome_arq));
+        String linha = "";
+        int[] size;
+        int i=0,j = 1;
+        String[] line;
+        
+        TADMatriz matriz = new TADMatriz(l,c);
+        
+//        System.out.printf("i: "+i+"|j: "+j);
+        
+                
+        while (true) {
+            if (linha != null) {
+                line = linha.split(" ");
+                for (String cell : line) {
+                    cell.replaceAll(" ","");
+                    if(!cell.isEmpty()){
+                        Float value = Float.parseFloat(cell);
+                        matriz.setElem(i, j, value);
+                        j++;
+                    }
+                    
+                }
+                j=1;
+                i++;
+ 
+            } else
+                break;
+            linha = buffRead.readLine();
+        }
+        
+        buffRead.close();
+        
+        return matriz;
+    }
+    
+    public static TADMatriz carrega(String nome_arq) throws FileNotFoundException, IOException{
+        //Preciso saber a quantidade de linhas e colunas para definir a matriz no inicio
+        /*
+        carrega uma matriz a partir de um arquivo texto de nome "nome_arq" O arquivo tem o
+        formato descrito no metodo "Salvar" (metodo acima). O me´todo retorna uma matriz povoada pelos dados do arquivo
+        */
+        
+        BufferedReader buffRead = new BufferedReader(new FileReader(nome_arq));
+        String linha = "";
+        int i=0, j=0,z=0, x=0;
+        String[] line;
+        TADMatriz matriz = new TADMatriz(5,7);
+                
+        while (true) {
+            if (linha != null) {
+                line = linha.split(" ");
+                for (String cell : line) {
+                    cell.replaceAll(" ","");
+                    if(!cell.isEmpty()){
+                        j++;
+                    }
+                }
+                z=j;
+                x=i;
+                j=0;
+                i++;
+ 
+            } else
+                break;
+            linha = buffRead.readLine();
+        }
+        
+        buffRead.close();
+//        System.out.printf("i: "+i+"|j: "+j+"|z: "+z+"|x: "+x+"\n");
+        
+        TADMatriz tadMatriz = TADMatriz.carrega(nome_arq,x,z);;
+        
+        return tadMatriz;
+        
     }
     
     //To Make
@@ -155,12 +240,25 @@ public class TADMatriz {
         /*
         salva a matriz corrente (this) em um arquivo texto de nome nome_arq cada linha do arquivo deve ser uma linha da matriz
         */
-        BufferedWriter buffWrite = new BufferedWriter(new FileWriter("C:\\Users\\luizg\\Documents\\NetBeansProjects\\TPA_meaven\\src\\main\\java\\ifes\\bsi\\tpa\\matriz\\"+nome_arq+".txt"));
-        String linha = "";
-
-        buffWrite.append(/*data*/"\n");
-        
-        buffWrite.close();
-        return null;
+        BufferedWriter bw = null;
+        FileWriter fw = null;
+        try {
+            fw = new FileWriter("C:\\Users\\luizg\\Documents\\NetBeansProjects\\TPA_meaven\\src\\main\\java\\ativ-1-tpa-taddic\\bdmatrizes\\"+nome_arq+".txt");
+            bw = new BufferedWriter(fw);
+            String line;
+            for(int i=1;i<=this.linhas;i++){
+                line = "";
+                for(int j=1;j<=this.colunas;j++){
+                    line += this.getElem(i, j)+" ";
+                }
+                line += "\n";
+                bw.write(line);
+            }
+            bw.close();
+        } catch (IOException ex) {
+            Logger.getLogger(TADMatriz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        bw = new BufferedWriter(fw);
+        return nome_arq;
     }
 }
