@@ -7,14 +7,9 @@ import java.util.Map;
 import java.util.Set;
 
 import _my_tools.*;
-import ifes.bsi.tpa.dic.TADDicChain;
+import ifes.bsi.tpa.taddic.TADDicChain;
 import java.util.Arrays;
 
-/*
-bugs relatados:
-caminho não encontrado
-
-*/
 
 class RegMD {
 	private String cpf;
@@ -112,11 +107,6 @@ public class DicBenchmark {
 		LinkedList<Object> lstKs = dicA.keys();
 		
 		int i =0;
-//                printData(dicA);
-//                
-//                for(int z = 0; z < 10; z++) {
-//                    System.out.printf(""+ lstKs.get(z).toString() +" ");
-//                }
                 
 		while(dicA.size() > 0) {
 			RegMD dado = (RegMD)dicA.removeElement(lstKs.get(i));
@@ -193,7 +183,7 @@ public class DicBenchmark {
 		System.out.println(" .elements();");
 		System.out.println(" .clone();");
 		System.out.println(" .equals();");		
-            dicB.showCollisionsDiagram();
-            dicC.showCollisionsDiagram();
+//            dicB.showCollisionsDiagram(); provavelmente não rode no PC do professor porque estou no windows. (ele mostra o grafico de colisões).
+//            dicC.showCollisionsDiagram();
 	} // fim main
 } // fim classe DicBenchmark

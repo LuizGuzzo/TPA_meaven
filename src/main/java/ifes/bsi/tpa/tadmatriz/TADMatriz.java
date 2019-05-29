@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ifes.bsi.tpa.matriz;
+package ifes.bsi.tpa.tadmatriz;
 
-import ifes.bsi.tpa.dic.TADDicChain;
+import ifes.bsi.tpa.taddic.TADDicChain;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -30,10 +30,7 @@ public class TADMatriz {
     private TADDicChain dados; //armazena os dados que a matriz recebe
     private List<ChaveMatriz> chaves; //é a lista de "tuplas" das chaves
     
-    public TADMatriz(){
-        this(100,100);
-    }
-    
+
     public TADMatriz(int linhas, int colunas) {
         this.linhas = linhas;
         this.colunas = colunas;
@@ -120,6 +117,7 @@ public class TADMatriz {
         return null;
     }
     
+        
      // retorna um novo TADMatriz resultado da multiplicação da matriz atual (this) pela argumento m
     public TADMatriz multi(TADMatriz m){
         if(this.quantColunas() != m.quantLinhas()) return null;
@@ -150,115 +148,72 @@ public class TADMatriz {
         
     }
     
-    //CAOS TOTAL
-    public static TADMatriz carrega(String nome_arq,int l, int c) throws FileNotFoundException, IOException{
-        
-        /*
-        carrega uma matriz a partir de um arquivo texto de nome "nome_arq" O arquivo tem o
-        formato descrito no metodo "Salvar" (metodo acima). O me´todo retorna uma matriz povoada pelos dados do arquivo
-        */
-        
+    public static TADMatriz carrega(String nome_arq) throws FileNotFoundException, IOException{
         BufferedReader buffRead = new BufferedReader(new FileReader(nome_arq));
         String linha = "";
-        int[] size;
-        int i=0,j = 1;
-        String[] line;
+        int i=0,j=0;
         
-        TADMatriz matriz = new TADMatriz(l,c);
-        
-//        System.out.printf("i: "+i+"|j: "+j);
-        
+        List<String> resultado = new ArrayList<>();
                 
         while (true) {
             if (linha != null) {
-                line = linha.split(" ");
-                for (String cell : line) {
-                    cell.replaceAll(" ","");
-                    if(!cell.isEmpty()){
-                        Float value = Float.parseFloat(cell);
-                        matriz.setElem(i, j, value);
-                        j++;
-                    }
-                    
+                if(!linha.trim().isEmpty()){
+                    resultado.add(linha);
+                    i++;
                 }
-                j=1;
-                i++;
- 
             } else
                 break;
             linha = buffRead.readLine();
         }
-        
         buffRead.close();
+        
+        
+        
+        String[] line = resultado.get(1).split("\\s+");
+        for (String string : line) {
+            if(!string.isEmpty()){
+                j++;
+//                System.out.println("line");
+            }
+        }
+        
+//        System.out.printf("quantidade de linhas: "+i+"\n");
+//        System.out.printf("quantidade de colunas: "+j+"\n");
+        
+        TADMatriz matriz = new TADMatriz(i,j);
+        int countI=1,countJ=1;
+        for (String lineResult : resultado) {
+            line = lineResult.split("\\s+");
+            for (String cell : line) 
+                if(!cell.isEmpty()){
+                    matriz.setElem(countI, countJ, Float.parseFloat(cell));
+                    countJ++;
+                }
+            countJ=1;
+            countI++;
+        }
         
         return matriz;
-    }
-    
-    public static TADMatriz carrega(String nome_arq) throws FileNotFoundException, IOException{
-        //Preciso saber a quantidade de linhas e colunas para definir a matriz no inicio
-        /*
-        carrega uma matriz a partir de um arquivo texto de nome "nome_arq" O arquivo tem o
-        formato descrito no metodo "Salvar" (metodo acima). O me´todo retorna uma matriz povoada pelos dados do arquivo
-        */
-        
-        BufferedReader buffRead = new BufferedReader(new FileReader(nome_arq));
-        String linha = "";
-        int i=0, j=0,z=0, x=0;
-        String[] line;
-        TADMatriz matriz = new TADMatriz(5,7);
-                
-        while (true) {
-            if (linha != null) {
-                line = linha.split(" ");
-                for (String cell : line) {
-                    cell.replaceAll(" ","");
-                    if(!cell.isEmpty()){
-                        j++;
-                    }
-                }
-                z=j;
-                x=i;
-                j=0;
-                i++;
- 
-            } else
-                break;
-            linha = buffRead.readLine();
-        }
-        
-        buffRead.close();
-//        System.out.printf("i: "+i+"|j: "+j+"|z: "+z+"|x: "+x+"\n");
-        
-        TADMatriz tadMatriz = TADMatriz.carrega(nome_arq,x,z);;
-        
-        return tadMatriz;
         
     }
     
-    //To Make
+    
+    
     public String salva(String nome_arq) throws IOException{
         /*
         salva a matriz corrente (this) em um arquivo texto de nome nome_arq cada linha do arquivo deve ser uma linha da matriz
         */
-        BufferedWriter bw = null;
-        FileWriter fw = null;
-        try {
-            fw = new FileWriter("C:\\Users\\luizg\\Documents\\NetBeansProjects\\TPA_meaven\\src\\main\\java\\ativ-1-tpa-taddic\\bdmatrizes\\"+nome_arq+".txt");
-            bw = new BufferedWriter(fw);
-            String line;
-            for(int i=1;i<=this.linhas;i++){
-                line = "";
-                for(int j=1;j<=this.colunas;j++){
-                    line += this.getElem(i, j)+" ";
-                }
-                line += "\n";
-                bw.write(line);
+        BufferedWriter bufferWriter = new BufferedWriter(new FileWriter(nome_arq, true));
+        String line;
+        for(int i=1;i<=this.quantLinhas();i++){
+            line = "";
+            for(int j=1;j<=this.quantColunas();j++){
+                line += this.getElem(i, j)+" ";
             }
-            bw.close();
-        } catch (IOException ex) {
-            Logger.getLogger(TADMatriz.class.getName()).log(Level.SEVERE, null, ex);
+            line += "\n";
+            bufferWriter.write(line);
         }
-        bw = new BufferedWriter(fw);
+        bufferWriter.close();
         return nome_arq;
     }
 }

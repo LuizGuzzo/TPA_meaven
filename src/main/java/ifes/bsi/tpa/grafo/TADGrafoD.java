@@ -5,7 +5,7 @@
  */
 package ifes.bsi.tpa.grafo;
 
-import ifes.bsi.tpa.dic.TADDicChain;
+import ifes.bsi.tpa.taddic.TADDicChain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;

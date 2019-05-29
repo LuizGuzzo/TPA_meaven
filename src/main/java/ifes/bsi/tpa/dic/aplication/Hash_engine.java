@@ -1,6 +1,6 @@
 package ifes.bsi.tpa.dic.aplication;
 
-import ifes.bsi.tpa.dic.HashEngineDefault;
+import ifes.bsi.tpa.taddic.HashEngineDefault;
 
 /**
  *
@@ -18,6 +18,7 @@ public class Hash_engine extends HashEngineDefault {
         return hash;
     }
     
+    //oque esta atualmente sendo utilizado
     @Override
     public long hash_func(Object o){
         long hash = 0;

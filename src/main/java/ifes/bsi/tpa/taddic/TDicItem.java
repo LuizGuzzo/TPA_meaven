@@ -1,4 +1,4 @@
-package ifes.bsi.tpa.dic;
+package ifes.bsi.tpa.taddic;
 
 /**
  *
