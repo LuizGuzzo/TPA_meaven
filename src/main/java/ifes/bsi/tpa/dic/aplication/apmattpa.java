@@ -29,7 +29,7 @@ public class apmattpa {
         TADMatriz matriz = TADMatriz.carrega(caminho_arq+arqMatriz);
         TADMatriz matrizAux;
         System.out.println("Carregando arquivo: "+caminho_arq+arqMatriz);
-        System.out.println("================ Matriz Inicial ================");
+        System.out.println("---------------- Matriz Inicial ----------------");
         matriz.printMatriz();
         
         
@@ -37,47 +37,51 @@ public class apmattpa {
         while( line != null){
             String linha[] = line.split(",");
             switch (linha[0]){
-                case "+":
-                    arqMatriz = linha[1]+".txt";
-                    matrizAux = TADMatriz.carrega(caminho_arq+arqMatriz);
-                    matriz = matriz.soma(matrizAux);
-                    System.out.println("================ Matriz Somada ================");
-                    matriz.printMatriz();
-                    break;
+                
                 case "-":
                     arqMatriz = linha[1]+".txt";
                     matrizAux = TADMatriz.carrega(caminho_arq+arqMatriz);
                     matrizAux.vezesK(-1f);
                     matriz = matriz.soma(matrizAux);
-                    System.out.println("================ Matriz Subtraida ================");
+                    System.out.println("---------------- Subtraida ----------------");
                     matriz.printMatriz();
                     break;
+                    
+                case "+":
+                    arqMatriz = linha[1]+".txt";
+                    matrizAux = TADMatriz.carrega(caminho_arq+arqMatriz);
+                    matriz = matriz.soma(matrizAux);
+                    System.out.println("================ Somada ----------------");
+                    matriz.printMatriz();
+                    break;
+                
+                case "t":
+                    matriz = matriz.transposta();
+                    System.out.println("---------------- Transposta ----------------");
+                    matriz.printMatriz();
+                    break;
+                    
                 case "*":
                     if(linha[1].matches("[0-9]+")){  //expressão regular
                         Float multiplicador = Float.parseFloat(linha[1]);
                         matriz.vezesK(multiplicador);
-                        System.out.println("================ Matriz VezesK ================");
+                        System.out.println("---------------- VezesK ----------------");
                         matriz.printMatriz();
                     }
                     else{
                         arqMatriz = linha[1]+".txt";
                         matrizAux = TADMatriz.carrega(caminho_arq+arqMatriz);
                         matriz = matriz.multi(matrizAux);
-                        System.out.println("================ Matriz Multiplicada ================");
+                        System.out.println("---------------- Multiplicada ----------------");
                         matriz.printMatriz();
                     }
-                    break;
-                case "t":
-                    matriz = matriz.transposta();
-                    System.out.println("================ Matriz Transposta ================");
-                    matriz.printMatriz();
                     break;
             }
             
             line = bufferReader.readLine();
         }
      
-        System.out.println("================ Matriz Final ================");
+        System.out.println("---------------- Matriz Final ----------------");
         matriz.printMatriz();
         matriz.salva(caminho_arq+"resposta.txt");
         
