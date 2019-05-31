@@ -85,5 +85,8 @@ public class apmattpa {
         matriz.printMatriz();
         matriz.salva(caminho_arq+"resposta.txt");
         
+        matriz.printDiagonal();
+
+        
     }
 }

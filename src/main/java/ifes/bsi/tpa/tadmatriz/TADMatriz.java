@@ -148,6 +148,51 @@ public class TADMatriz {
         
     }
     
+    public TADMatriz principal(){
+        TADMatriz tadMatriz = new TADMatriz(this.quantLinhas(),this.quantColunas());
+        
+        for (int i = 0; i < this.quantLinhas()+1; i++) {
+            for (int j = 0; j < this.quantColunas()+1; j++) {
+                if(i == j){
+//                    System.out.printf("i: "+i+"|j: "+j+"|");
+                    tadMatriz.setElem(i, j, this.getElem(i, j));
+                }else{
+                    tadMatriz.setElem(i, j, 0f);
+                }
+            }
+//            System.out.println("");
+        }
+        return tadMatriz;
+    }
+    
+    public TADMatriz secundaria(){
+        TADMatriz tadMatriz = new TADMatriz(this.quantLinhas(),this.quantColunas());
+        int colunSize = this.quantColunas()+1;
+        
+        for (int i = 0; i < this.quantLinhas()+1; i++) {
+            for (int j = this.quantColunas()+1; j > 0; j--) {
+                if(i + j == colunSize){
+//                    System.out.printf("i: "+i+"|j: "+j+"|");
+                    tadMatriz.setElem(i, j, this.getElem(i, j));
+                }else{
+                    tadMatriz.setElem(i, j, 0f);
+                }
+            }
+//            System.out.println("");
+        }
+        return tadMatriz;
+    }
+    
+    public void printDiagonal(){
+        TADMatriz tadMatriz = new TADMatriz(this.quantLinhas(),this.quantColunas());
+        System.out.println("--------------- Diagonal Principal -----------------");
+        tadMatriz = this.principal();
+        tadMatriz.printMatriz();
+        System.out.println("--------------- Diagonal Secundaria -----------------");
+        tadMatriz = this.secundaria();
+        tadMatriz.printMatriz();
+    }
+    
     public static TADMatriz carrega(String nome_arq) throws FileNotFoundException, IOException{
         BufferedReader buffRead = new BufferedReader(new FileReader(nome_arq));
         String linha = "";
