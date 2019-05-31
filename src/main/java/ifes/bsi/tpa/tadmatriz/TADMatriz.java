@@ -148,7 +148,7 @@ public class TADMatriz {
         
     }
     
-    public TADMatriz principal(){
+    private TADMatriz principal(){
         TADMatriz tadMatriz = new TADMatriz(this.quantLinhas(),this.quantColunas());
         
         for (int i = 0; i < this.quantLinhas()+1; i++) {
@@ -165,7 +165,7 @@ public class TADMatriz {
         return tadMatriz;
     }
     
-    public TADMatriz secundaria(){
+    private TADMatriz secundaria(){
         TADMatriz tadMatriz = new TADMatriz(this.quantLinhas(),this.quantColunas());
         int colunSize = this.quantColunas()+1;
         
@@ -183,6 +183,28 @@ public class TADMatriz {
         return tadMatriz;
     }
     
+    private void onlyDataP(){
+        for (int i = 0; i < this.quantLinhas()+1; i++) {
+            for (int j = 1; j < this.quantColunas()+1; j++) {
+                if(i == j){
+                    System.out.printf(this.getElem(i, j)+"\n");
+                }
+            }
+        }
+    }
+        
+    private void onlyDataS(){
+        int colunSize = this.quantColunas()+1;
+        
+        for (int i = 1; i < this.quantLinhas()+1; i++) {
+            for (int j = this.quantColunas()+1; j > 0; j--) {
+                if(i + j == colunSize){
+                    System.out.printf(this.getElem(i, j)+"\n");
+                }
+            }
+        }
+    }
+    
     public void printDiagonal(){
         TADMatriz tadMatriz = new TADMatriz(this.quantLinhas(),this.quantColunas());
         System.out.println("--------------- Diagonal Principal -----------------");
@@ -191,6 +213,11 @@ public class TADMatriz {
         System.out.println("--------------- Diagonal Secundaria -----------------");
         tadMatriz = this.secundaria();
         tadMatriz.printMatriz();
+        System.out.println("--------------- Diagonal Principal Only Data -----------------");
+        this.onlyDataP();
+        System.out.println("--------------- Diagonal Principal Only Data-----------------");
+        this.onlyDataS();
+        
     }
     
     public static TADMatriz carrega(String nome_arq) throws FileNotFoundException, IOException{
