@@ -102,7 +102,7 @@ public class TADDicChain {
         this.achou = false;
         int indice = this.getIndice(chave,vet);
         
-        if (!this.vetBuckets[indice].isEmpty()) {
+        if (!vet[indice].isEmpty()) {
             int pos = 0;
             while (pos < vet[indice].size()) {
                 TDicItem item = (TDicItem) vet[indice].get(pos);
