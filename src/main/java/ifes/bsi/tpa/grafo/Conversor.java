@@ -54,6 +54,7 @@ public class Conversor {
             if(line == null) {
                 System.out.println("filme: "+filme+"| autoresId: "+atoresId.toString());
                 dicRelationships.insertItem(filme, atoresId);
+//                System.out.println("BEFORE: "+dicRelationships.findElement(filme));
                 buffRead.close();
                 break;
             }
@@ -70,7 +71,8 @@ public class Conversor {
                     if(!atoresId.isEmpty()){
                         System.out.println("filme: "+filme+"| autoresId: "+atoresId.toString());
                         dicRelationships.insertItem(filme, atoresId);
-                        atoresId.removeAll(atoresId);
+//                        System.out.println("BEFORE: "+dicRelationships.findElement(filme));
+                        atoresId = new ArrayList<>();
                     }
                     filme = vet[i];
                     
