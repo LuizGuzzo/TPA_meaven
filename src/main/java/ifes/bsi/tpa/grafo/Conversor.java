@@ -52,7 +52,7 @@ public class Conversor {
             line = buffRead.readLine(); 
             
             if(line == null) {
-                System.out.println("filme: "+filme+"| autoresId: "+atoresId.toString());
+//                System.out.println("filme: "+filme+"| autoresId: "+atoresId.toString());
                 dicRelationships.insertItem(filme, atoresId);
 //                System.out.println("BEFORE: "+dicRelationships.findElement(filme));
                 buffRead.close();
@@ -67,9 +67,9 @@ public class Conversor {
                     dicElements.insertItem(vet[i], this.geraIDVertex()); // Insere item de chave filme/ator e valor id;
 
                 if(i == 0){ //Se for filme...
-                    System.out.println("adicionando filme: "+vet[i]+"| ID: "+(Integer) dicElements.findElement(vet[i]));
+//                    System.out.println("adicionando filme: "+vet[i]+"| ID: "+(Integer) dicElements.findElement(vet[i]));
                     if(!atoresId.isEmpty()){
-                        System.out.println("filme: "+filme+"| autoresId: "+atoresId.toString());
+//                        System.out.println("filme: "+filme+"| autoresId: "+atoresId.toString());
                         dicRelationships.insertItem(filme, atoresId);
 //                        System.out.println("BEFORE: "+dicRelationships.findElement(filme));
                         atoresId = new ArrayList<>();
@@ -77,7 +77,7 @@ public class Conversor {
                     filme = vet[i];
                     
                 }else{
-                    System.out.println("adicionado ator: "+vet[i]+"| ID: "+(Integer) dicElements.findElement(vet[i]));
+//                    System.out.println("adicionado ator: "+vet[i]+"| ID: "+(Integer) dicElements.findElement(vet[i]));
                     atoresId.add((Integer) dicElements.findElement(vet[i]));
                 }
             }                
@@ -86,13 +86,13 @@ public class Conversor {
         // 2 dicionarios formados, o de relação e o de entidades
         //TIME TO WRITE
         
-        System.out.println("DEBUG SECTION");
-        dicRelationships.showall();
-        System.out.println("");
-        dicElements.showall();
-        
-        System.out.println("valores R:"+dicRelationships.elements());
-        System.out.println("valores E:"+dicElements.elements());
+//        System.out.println("DEBUG SECTION");
+//        dicRelationships.showall();
+//        System.out.println("");
+//        dicElements.showall();
+//        
+//        System.out.println("valores R:"+dicRelationships.elements());
+//        System.out.println("valores E:"+dicElements.elements());
         
         
         BufferedWriter bufferWriter = new BufferedWriter(new FileWriter(this.pathArq+output, true));
