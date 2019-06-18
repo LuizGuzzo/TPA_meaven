@@ -46,6 +46,7 @@ public class MainTeste {
                 g.insertVertex("E", 0);
                 g.insertVertex("F", 1);
                 g.insertVertex("G", 2);
+                g.insertVertex("H", 3);
 
                 g.insertEdge("A", "B", "1", 0);
                 g.insertEdge("A", "D", "2", 0);
@@ -53,7 +54,10 @@ public class MainTeste {
                 g.insertEdge("B", "C", "4", 0);
                 g.insertEdge("E", "F", "5", 0);
                 g.insertEdge("F", "G", "6", 0);
-                g.insertEdge("G", "C", "7", 0);
+                g.insertEdge("G", "A", "7", 0);
+                g.insertEdge("H", "C", "8", 0);
+                g.insertEdge("H", "D", "9", 0);
+                g.insertEdge("H", "F", "10", 0);
 		
 		g.printgrafo();
                 g.printmat();
@@ -69,14 +73,17 @@ public class MainTeste {
                 LinkedList<Vertex> resultado = new LinkedList<Vertex>();
                 
 		System.out.println("Grafo em busca de profundidade: ");
-                resultado = md.dfs("A");
+                resultado = md.dfs("H");
 		md.printAnswer(resultado);
                 
 		System.out.println();
 
                 System.out.println("Grafo em busca de nivel: ");
-		resultado = md.bfs("A");
+		resultado = md.bfs("H");
                 md.printAnswer(resultado);
+                System.out.println("");
+                System.out.println("Edge value:"+ g.getEdge("H", "D").getLabel());
+                System.out.println("oposto:"+ g.opposite("G", "7").getLabel());
                 
 		/*
 		ToGStream show = new ToGStream(g);

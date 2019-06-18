@@ -36,11 +36,9 @@ public class ProcessaGrafo {
 
             LinkedList<Vertex> vizinhos = grafo.adjacentVertices(pointed.getLabel()); //recebe todos os vizinhos do vertice
             if (vizinhos.size()!=0){ //se tiver vizinho
-                for (Vertex vizinho : vizinhos){  //percorre todos os vizinhos
-                    if(!output.contains(vizinho)){  //verifica se ja foram visitados
-                        stack.addFirst(vizinho);  //adiciona na pilha para serem visitados0
-                    }
-                }
+                for (Vertex vizinho : vizinhos)  //percorre todos os vizinhos
+                    if(!output.contains(vizinho))  //verifica se ja foram visitados
+                        stack.addFirst(vizinho);  //adiciona na pilha para serem visitados
             }
         }
 
@@ -59,9 +57,10 @@ public class ProcessaGrafo {
 
         while(queue.size() != 0){
             pointed = queue.remove(); //remove o dado na fila
-            LinkedList<Vertex> vizinhos = grafo.adjacentVertices(pointed.getLabel()); //pega os vizinhos
             if(!output.contains(pointed)) //e não estiverem ja sido verificados
                     output.add(pointed); // adiciona o apontado
+            
+            LinkedList<Vertex> vizinhos = grafo.adjacentVertices(pointed.getLabel()); //pega os vizinhos
             if(vizinhos.size() !=0){ //se tiver vizinhos
                 for (Vertex vizinho : vizinhos)  //para cada vizinho
                     if(!output.contains(vizinho)) //que não tenha sido verificado

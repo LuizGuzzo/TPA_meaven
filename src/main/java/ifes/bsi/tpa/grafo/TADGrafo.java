@@ -141,19 +141,9 @@ public class TADGrafo {
         return nome;
     }
     
-    public boolean valido(int v){
-        return((v >= primVertice) && (v<=ultiVertice) && !(lstEliminados.contains(v)));
-    }
     
-    public Vertex getVertex(String label) {
-		Vertex vertex = (Vertex)dicLblVertex.findElement(label);
-		if(dicLblVertex.NO_SUCH_KEY()) {
-			return null;
-		}
-		else {
-			return vertex;
-		}
-	}
+    
+
     
     public Vertex[] vertices() {
 		Vertex[] v = new Vertex[numVertices()];
@@ -201,18 +191,20 @@ public class TADGrafo {
             return null;
         }
         else {
-            LinkedList<Object> lstEdgeKeys = dicLblEdge.keys();
-            
-            for(int i = 0; i < lstEdgeKeys.size(); i++) {
-                Edge e = (Edge)dicLblEdge.findElement(lstEdgeKeys.get(i));
-                if(vOrigem.getId() == idEdge) {
-                    return e;
-                }
-            }
+            Edge e = this.intToEdge(idEdge);
+            return e;
         }
-        
-        return null;
     }
+    
+        public Vertex getVertex(String label) {
+		Vertex vertex = (Vertex)dicLblVertex.findElement(label);
+		if(dicLblVertex.NO_SUCH_KEY()) {
+			return null;
+		}
+		else {
+			return vertex;
+		}
+	}
     
     public Vertex intToVertex(int id) {
     	LinkedList<Object> lst = dicLblVertex.elements();
@@ -221,11 +213,6 @@ public class TADGrafo {
             if(id == v.getId())
                 return v;
         }
-//    	for(int i = 0; i <lst.size(); i++) {
-//    		Vertex v = (Vertex)lst.get(i);
-//    		if(id == v.getId())
-//    			return v;
-//    	}
     	return null;
     }
     
@@ -240,13 +227,13 @@ public class TADGrafo {
     	return null;
     }
     
-     public Vertex[] endVertices(String labelE){ //retorna os vertices que estão ligados no edge
+     public Vertex[] endVertices(String labelE){ //retorna os vertices que estão ligados no edge (inicio e fim)
     	Edge oE = (Edge)dicLblEdge.findElement(labelE);
     	if(dicLblEdge.NO_SUCH_KEY())
     		return null;
     	int idE = oE.getId();
         for(int i = primVertice;i<=ultiVertice;i++){
-            if(valido(i)){
+            if(!(lstEliminados.contains(i))){
                 for(int k=primVertice;k<=ultiVertice;k++){
                     if(mat[i][k] == idE){
                         Vertex[] v = new Vertex[2];
@@ -260,8 +247,10 @@ public class TADGrafo {
         
         return null;
     }
+     
     
-    public Vertex opposite(String v, String e){
+    
+    public Vertex opposite(String v, String e){ //oposto do vertice tal no caminho tal (ou seja em qual vertice cai o destino indo por caminho x)
         Vertex objV = (Vertex)dicLblVertex.findElement(v);
         if(dicLblVertex.NO_SUCH_KEY()) {
             return null;
@@ -274,14 +263,8 @@ public class TADGrafo {
         
         for(int i = primVertice; i <= ultiVertice; i++) {
             if((!lstEliminados.contains(i)) && (mat[objV.getId()][i] == objE.getId())) {
-                LinkedList<Object> lstVs = dicLblVertex.keys();
-                // não seria mais simples eu simplesmente pegar o "i" e converte-lo para vertice usando intToVertice? e retorna-lo, ja que o "i" é basicamente um ID
-                for(int m = 0; m< lstVs.size(); m++) {
-                    Vertex oU = (Vertex)dicLblVertex.findElement(lstVs.get(m));
-                    if(oU.getId() == i) {
-                        return oU;
-                    }
-                }
+                Vertex oposto = this.intToVertex(i);
+                return oposto;
             }
         }
         
@@ -331,7 +314,7 @@ public class TADGrafo {
     
     
     
-    public Edge insertEdge(String origem, String destino, String label, Object o) { //até o edge armazena?
+    public Edge insertEdge(String origem, String destino, String label, Object o) {
         Vertex vOrigem = (Vertex)dicLblVertex.findElement(origem);
         if(dicLblVertex.NO_SUCH_KEY()) {
             return null;
