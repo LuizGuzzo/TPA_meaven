@@ -24,7 +24,7 @@ import java.io.IOException;
 public class GrafBenchmark {
 	public static void main(String args[]){
 		String pasta_tgf = "C:/Users/luizg/Documents/NetBeansProjects/TPA_meaven/src/main/java/Base-Grafos/";
-		String nome_grafo_tgf = "tgfmovies15.txt";
+		String nome_grafo_tgf = "tgfmovies10.txt";
 		String arq_grafo = pasta_tgf + nome_grafo_tgf;
 		TADGrafoDV3 g = TADGrafoDV3.carregaTGF(arq_grafo, 12000);	
 		
