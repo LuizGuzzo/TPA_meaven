@@ -12,8 +12,8 @@ import java.util.LinkedList;
  * @author luizg
  */
 public class ProcessaGrafo {
-    TADGrafo grafo;
-    public  ProcessaGrafo(TADGrafo g) {
+    TADGrafoDV3 grafo;
+    public  ProcessaGrafo(TADGrafoDV3 g) {
      //Armazenar o grafo g
      grafo = g;
 

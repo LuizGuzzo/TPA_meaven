@@ -43,5 +43,11 @@ public class Vertex {
         this.dado = dado;
     }
     
+    public boolean equals(Vertex e) {
+        if(this.label == e.getLabel())
+            if(this.dado == e.getDado())
+                return true;
+        return false;
+    }
     
 }

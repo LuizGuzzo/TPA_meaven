@@ -1,10 +1,7 @@
 package _my_tools;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.InputStream;
 
 public class GnuPlotter {
 	private String template;

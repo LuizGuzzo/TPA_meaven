@@ -5,6 +5,8 @@
  */
 package ifes.bsi.tpa.grafo;
 
+import java.util.Objects;
+
 /**
  *
  * @author luizg
@@ -42,6 +44,14 @@ public class Edge {
     public void setDado(Object dado) {
         this.dado = dado;
     }
+
+    public boolean equals(Edge e) {
+        if(this.label == e.getLabel())
+            if(this.dado == e.getDado())
+                return true;
+        return false;
+    }
+    
     
     
 }

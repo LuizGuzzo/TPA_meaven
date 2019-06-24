@@ -20,7 +20,8 @@ public class ArquivoTxt {
 	    	   arqtxt.bw = new BufferedWriter(arqtxt.fw);
 	    	   return arqtxt;
 	        } catch (IOException e) {
-	            e.printStackTrace();
+	            //e.printStackTrace();
+	        	return null;
 	       } // catch    		
     	}
     	else 
@@ -31,10 +32,10 @@ public class ArquivoTxt {
      	    	   arqtxt.br = new BufferedReader(arqtxt.fr);
      	    	   return arqtxt;
      	        } catch (IOException e) {
-     	            e.printStackTrace();
+     	        	return null;
+     	           // e.printStackTrace();
      	       } // catch    		
      	    }
-
 		return null;
     }
     

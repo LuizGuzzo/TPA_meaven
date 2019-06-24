@@ -16,6 +16,13 @@
         <artifactId>matplotlib4j</artifactId>
         <version>0.4.0</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.graphstream/gs-core -->
+    <dependency>
+        <groupId>org.graphstream</groupId>
+        <artifactId>gs-core</artifactId>
+        <version>1.2</version>
+    </dependency>
+
     
     </dependencies>
 </project>
