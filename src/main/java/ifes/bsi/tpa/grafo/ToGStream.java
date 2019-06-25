@@ -36,20 +36,15 @@ public class ToGStream {
             }
             if(edgeVisivel) {
                 LinkedList<Edge> edges = g.edges();
-                LinkedList<String[]> arestas = new LinkedList<String[]>();
                 for (Edge e : edges) {
                     Vertex[] endV = g.endVertices(e.getLabel());
                     if(dirigido) {
                         org.graphstream.graph.Edge edge = this.grafo.addEdge(e.getLabel(), endV[0].getLabel(),endV[1].getLabel());
                         edge.addAttribute("ui.label", e.getLabel());
-                        String[] labelV = {endV[0].getLabel(),endV[1].getLabel()};
-                        arestas.add(labelV);
                     }
                     else {
                         org.graphstream.graph.Edge edge = this.grafo.addEdge(e.getLabel(), endV[0].getLabel(),endV[1].getLabel());
                         edge.addAttribute("ui.label", e.getLabel());
-                        String[] labelV = {endV[0].getLabel(),endV[1].getLabel()};
-                        arestas.add(labelV);	
                     }
                 }
             }
