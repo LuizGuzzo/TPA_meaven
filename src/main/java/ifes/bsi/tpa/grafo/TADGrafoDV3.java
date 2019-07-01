@@ -237,7 +237,6 @@ public class TADGrafoDV3 {
                 }
             }
         }else{
-            System.out.println("5");
             return false;
         }
         return true;
@@ -356,6 +355,32 @@ public class TADGrafoDV3 {
             e.setDado(o);
         }
         return e; 
+    }
+    
+    //com custo no edge
+    public Edge insertEdge(String origem, String destino, String label, Object o, int cost){
+        Vertex vOrigem = (Vertex)dicLblVertex.findElement(origem);
+        if(this.dicLblVertex.NO_SUCH_KEY()){
+            return null;
+        }
+        Vertex vDestino = (Vertex)dicLblVertex.findElement(destino);
+        if(this.dicLblVertex.NO_SUCH_KEY()){
+            return null;
+        }
+        
+        Edge e = (Edge)dicLblEdge.findElement(label);
+        if(dicLblEdge.NO_SUCH_KEY()){
+            e = new Edge(label, o);
+            e.setId(this.geraIDedge++);
+            e.setCost(cost);
+            dicLblEdge.insertItem(label, e);
+            mat[vOrigem.getId()][vDestino.getId()] = e.getId();
+            quantEdges++;
+        }
+        else{
+            e.setDado(o);
+        }
+        return e;
     }
     
     public Object removeEdge(String edge){

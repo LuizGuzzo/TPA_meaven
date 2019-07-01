@@ -15,6 +15,7 @@ public class Edge {
     private int id;
     private String label;
     private Object dado;
+    private int cost = -1;
     
     public Edge(String label, Object dado){
         this.label = label;
@@ -44,6 +45,15 @@ public class Edge {
     public void setDado(Object dado) {
         this.dado = dado;
     }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+    
 
     public boolean equals(Edge e) {
         if(this.label == e.getLabel())
