@@ -145,6 +145,7 @@ public class TADGrafoDV3 {
         return (Edge)dicLblEdge.findElement(labelE);
     }
     
+    
     public Edge getEdge(String origem, String destino) {
         Vertex vDestino = (Vertex)dicLblVertex.findElement(destino);
         if(dicLblVertex.NO_SUCH_KEY()) {

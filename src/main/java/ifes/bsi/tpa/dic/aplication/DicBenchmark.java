@@ -64,7 +64,7 @@ public class DicBenchmark {
 	public static void main(String[] args) {
 		int TAM_TESTE = 50000;
 		TADDicChain dicA = new TADDicChain();
-		ArquivoTxt arqIn = ArquivoTxt.open("C:\\Users\\luizg\\Documents\\NetBeansProjects\\TPA_meaven\\src\\main\\java\\ifes\\bsi\\tpa\\dic\\maladireta.csv", "rt");
+		ArquivoTxt arqIn = ArquivoTxt.open("C:\\Users\\luizg\\Documents\\NetBeansProjects\\TPA_meaven\\src\\main\\java\\ifes\\bsi\\tpa\\taddic\\maladireta.csv", "rt");
 		
 		HashMap<Object, Object> hm = new HashMap<Object, Object>();
 		
@@ -183,7 +183,7 @@ public class DicBenchmark {
 		System.out.println(" .elements();");
 		System.out.println(" .clone();");
 		System.out.println(" .equals();");		
-//            dicB.showCollisionsDiagram(); provavelmente não rode no PC do professor porque estou no windows. (ele mostra o grafico de colisões).
-//            dicC.showCollisionsDiagram();
+            dicB.showCollisionsDiagram(); //provavelmente não rode no PC do professor porque estou no windows. (ele mostra o grafico de colisões).
+            dicC.showCollisionsDiagram();
 	} // fim main
 } // fim classe DicBenchmark

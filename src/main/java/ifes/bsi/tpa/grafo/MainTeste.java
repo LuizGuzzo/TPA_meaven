@@ -6,10 +6,11 @@
 package ifes.bsi.tpa.grafo;
 
 import ifes.bsi.tpa.grafo.processadores.DSDijkstra;
+import ifes.bsi.tpa.grafo.processadores.DSFloydW;
 import ifes.bsi.tpa.grafo.processadores.ProcessaGrafo;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.LinkedList;
+
 
 /**
  *
@@ -23,8 +24,7 @@ public class MainTeste {
     public static void main(String[] args) throws FileNotFoundException, IOException {
         
         System.out.println("===== MAIN =====");
-        //String file = "E:\\BACKUP 04 - 10\\Documents\\NetBeansProjects\\TPA\\src\\ifes\\bsi\\tpa\\taddic\\grafo\\Base-Grafos\\tgfmovies10.txt";
-        TADGrafoDV3 g = new TADGrafoDV3("grafinho");
+        TADGrafoDV3 g = new TADGrafoDV3("graf");
         
         
         g.insertVertex("A", "A");
